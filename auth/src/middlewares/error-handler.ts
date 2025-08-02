@@ -1,6 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { RequestValidationError } from "../errors/request-validation-error";
-import { DatabaseConnectionError } from "../errors/database-connectionn-error";
 import { CustomError } from "../errors/custom-error";
 
 export const errorHandler = (
