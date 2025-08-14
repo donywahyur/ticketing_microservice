@@ -1,10 +1,10 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
-import { ValidateRequest } from "../middlewares/validate-request";
 import { User } from "../models/User";
-import { BadRequestError } from "../errors/bad-request-error";
 import { Password } from "../services/password";
 import jwt from "jsonwebtoken";
+
+import { ValidateRequest, BadRequestError } from "@dynotec/common";
 
 const router = express.Router();
 
