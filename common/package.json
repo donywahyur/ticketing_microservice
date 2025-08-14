@@ -1,6 +1,6 @@
 {
   "name": "@dynotec/common",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "files": [
@@ -18,7 +18,7 @@
   "description": "",
   "devDependencies": {
     "del-cli": "^6.0.0",
-    "typescript": "^5.9.2"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "@types/cookie-session": "^2.0.49",
