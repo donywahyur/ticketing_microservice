@@ -13,7 +13,9 @@ const LandingPage = ({ currentUser }) => {
 LandingPage.getInitialProps = async (context) => {
 	const client = buildClient(context);
 	try {
-		const { data } = await client.get("/api/users/currentuser");
+		const { data } = await client.get("/api/users/currentuser", {
+			withCredentials: true,
+		});
 		return data;
 	} catch (error) {
 		console.error("Error fetching current user:", error);

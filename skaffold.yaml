@@ -22,6 +22,14 @@ build:
         manual:
           - src: "**/*.js"
             dest: "."
+    - image: donyramadhan/ticketing_tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: "."
 
 manifests:
   rawYaml:
