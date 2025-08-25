@@ -58,7 +58,7 @@ it("return 404 if the user provides an invalid title or price", async () => {
 			title: "",
 			price: 20,
 		})
-		.expect(401);
+		.expect(400);
 });
 it("updates the ticket provided valid inputs", async () => {
 	const cookie = await global.signin();

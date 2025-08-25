@@ -40,7 +40,7 @@ router.put(
 		});
 		await ticket.save();
 
-		res.send(ticket);
+		res.status(201).send(ticket);
 	}
 );
 

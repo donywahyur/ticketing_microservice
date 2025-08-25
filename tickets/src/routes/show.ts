@@ -9,13 +9,11 @@ router.get("/api/tickets/:id", async (req: Request, res: Response) => {
 
 	const ticket = await Ticket.findById(id);
 
-	console.log(ticket);
-
 	if (!ticket) {
 		throw new NotFoundError();
 	}
 
-	res.status(201).send(ticket);
+	res.status(200).send(ticket);
 });
 
 export { router as showTicketRouter };
