@@ -7,6 +7,8 @@ import {
 } from "@dynotec/common";
 import { body } from "express-validator";
 import { Ticket } from "../models/Ticket";
+import { TicketUpdatedPublisher } from "../events/publishers/ticket-updated-publisher";
+import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
@@ -39,6 +41,14 @@ router.put(
 			price,
 		});
 		await ticket.save();
+
+		await new TicketUpdatedPublisher(natsWrapper.client).publish({
+			id: ticket.id,
+			title: ticket.title,
+			price: ticket.price,
+			userId: ticket.userId,
+			version: ticket.__v,
+		});
 
 		res.status(201).send(ticket);
 	}
