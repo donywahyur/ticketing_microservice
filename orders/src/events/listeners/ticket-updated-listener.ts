@@ -1,0 +1,30 @@
+import { Listener, Subjects, TicketUpdatedEvent } from "@dynotec/common";
+import { queueGroupName } from "./queue-group-name";
+import { Message } from "node-nats-streaming";
+import { Ticket } from "../../models/Ticket";
+
+export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
+	subject: Subjects.TicketUpdated = Subjects.TicketUpdated;
+	queueGroupName = queueGroupName;
+
+	async onMessage(data: TicketUpdatedEvent["data"], msg: Message) {
+		console.log("Event data", data.version);
+
+		const ticket = await Ticket.findById(data.id);
+
+		if (!ticket) {
+			throw new Error("Ticket not found");
+		}
+
+		ticket.set({
+			title: data.title,
+			price: data.price,
+		});
+
+		await ticket.save();
+
+		console.log("Ticket updated", ticket);
+
+		msg.ack();
+	}
+}

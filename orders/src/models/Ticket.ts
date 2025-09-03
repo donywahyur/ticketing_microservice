@@ -2,6 +2,7 @@ import { OrderStatus } from "@dynotec/common";
 import mongoose from "mongoose";
 
 interface TicketAttrs {
+	id: string;
 	title: string;
 	price: number;
 }
@@ -31,12 +32,15 @@ ticketSchema.set("toJSON", {
 	transform: (doc, ret: any) => {
 		ret.id = ret._id;
 		delete ret._id;
-		delete ret.password;
 	},
 });
 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
-	return new Ticket(attrs);
+	return new Ticket({
+		_id: attrs.id,
+		title: attrs.title,
+		price: attrs.price,
+	});
 };
 ticketSchema.methods.isReserved = async function () {
 	const existingOrder = await this.model("Order").findOne({
